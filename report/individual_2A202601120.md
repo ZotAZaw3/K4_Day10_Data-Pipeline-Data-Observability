@@ -2,27 +2,29 @@
 
 ## 1. Thông tin cá nhân
 
-| Thông tin | Nội dung |
-|---|---|
-| Họ và tên | Nguyễn Quang Huy |
-| MSSV | 2A202601120 |
-| Khóa/Lớp | K4 |
-| Tên nhóm | Chưa cung cấp |
-| Vai trò chính | Pipeline integration, evaluation và debugging |
-| Repository | `K4_Day10_Data-Pipeline-Data-Observability` |
-| Ngày hoàn thành | 2026-08-06 |
+
+| Thông tin         | Nội dung                                      |
+| ------------------ | ---------------------------------------------- |
+| Họ và tên       | Nguyễn Quang Huy                              |
+| MSSV               | 2A202601120                                    |
+| Khóa/Lớp         | K4                                             |
+| Tên nhóm         | FIFO                                           |
+| Vai trò chính    | Pipeline integration, evaluation và debugging |
+| Repository         | `K4_Day10_Data-Pipeline-Data-Observability`    |
+| Ngày hoàn thành | 2026-08-06                                     |
 
 ## 2. Vai trò và phạm vi công việc
 
 ### Phần việc sở hữu
 
-| Module/deliverable | File/hàm phụ trách | Input | Output bàn giao | Trạng thái |
-|---|---|---|---|---|
-| Evaluation set và golden answer | `data/eval/test_set.json`, `src/evaluation/testset.py` | Clean dataset | 20 evaluation samples có `ground_truth` và `ground_truth_doc_ids` | Hoàn thành artifact; generator còn cần cải thiện cho category |
-| Evaluation metrics và Ragas adapter | `src/evaluation/metrics.py` | Test set, index, answers | Baseline/corrupted/repaired metrics | Hoàn thành |
-| Debugging dữ liệu thời gian | `src/ingestion/cleaning.py` | Raw records, `run_date` | `age_days` nhất quán | Hoàn thành |
-| JSON artifact serialization | `src/core/utils.py` | DataFrame records có Timestamp | JSON dùng được cho pipeline tiếp theo | Hoàn thành |
-| Evidence và blocker tracking | `blocker.md`, `data/reports/` | Metrics, quality và freshness artifacts | Log blocker, phase reports, corruption report | Hoàn thành |
+
+| Module/deliverable                   | File/hàm phụ trách                                  | Input                                    | Output bàn giao                                                   | Trạng thái                                                        |
+| ------------------------------------ | ------------------------------------------------------ | ---------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| Evaluation set và golden answer     | `data/eval/test_set.json`, `src/evaluation/testset.py` | Clean dataset                            | 20 evaluation samples có`ground_truth` và `ground_truth_doc_ids` | Hoàn thành artifact; generator còn cần cải thiện cho category |
+| Evaluation metrics và Ragas adapter | `src/evaluation/metrics.py`                            | Test set, index, answers                 | Baseline/corrupted/repaired metrics                                | Hoàn thành                                                        |
+| Debugging dữ liệu thời gian       | `src/ingestion/cleaning.py`                            | Raw records,`run_date`                   | `age_days` nhất quán                                             | Hoàn thành                                                        |
+| JSON artifact serialization          | `src/core/utils.py`                                    | DataFrame records có Timestamp          | JSON dùng được cho pipeline tiếp theo                         | Hoàn thành                                                        |
+| Evidence và blocker tracking        | `blocker.md`, `data/reports/`                          | Metrics, quality và freshness artifacts | Log blocker, phase reports, corruption report                      | Hoàn thành                                                        |
 
 ### Việc hỗ trợ ngoài phạm vi chính
 
@@ -32,14 +34,15 @@
 
 ## 3. Kết quả đã thực hiện
 
-| Nhiệm vụ | Bằng chứng | Kết quả |
-|---|---|---|
-| Sửa timezone khi tính `age_days` | `src/ingestion/cleaning.py` | Smoke test: raw 24, clean 24, `age_days` kiểu `int64` |
-| Sửa ghi clean DataFrame ra JSON | `src/core/utils.py` | Serialize 24 records có `pandas.Timestamp` thành công |
-| Sửa lỗi Ragas `EvaluationResult` | `src/evaluation/metrics.py` | Tổng hợp metric từ `result.scores`, không còn dùng `dict(result)` |
-| Làm sạch evaluation set | `data/eval/test_set.json` | 20 samples, không còn `ground_truth` rỗng |
-| Chạy baseline | `data/results/baseline_metrics.json` | Retrieval và answer metrics đạt 1.0 |
-| Chạy corruption và repair | `data/results/corruption_log.json`, `corrupted_metrics.json`, `repaired_metrics.json` | Corruption làm giảm chất lượng; repair khôi phục baseline |
+
+| Nhiệm vụ                        | Bằng chứng                                                                          | Kết quả                                                              |
+| --------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Sửa timezone khi tính`age_days` | `src/ingestion/cleaning.py`                                                           | Smoke test: raw 24, clean 24,`age_days` kiểu `int64`                  |
+| Sửa ghi clean DataFrame ra JSON  | `src/core/utils.py`                                                                   | Serialize 24 records có`pandas.Timestamp` thành công                |
+| Sửa lỗi Ragas`EvaluationResult` | `src/evaluation/metrics.py`                                                           | Tổng hợp metric từ`result.scores`, không còn dùng `dict(result)` |
+| Làm sạch evaluation set         | `data/eval/test_set.json`                                                             | 20 samples, không còn`ground_truth` rỗng                            |
+| Chạy baseline                    | `data/results/baseline_metrics.json`                                                  | Retrieval và answer metrics đạt 1.0                                 |
+| Chạy corruption và repair       | `data/results/corruption_log.json`, `corrupted_metrics.json`, `repaired_metrics.json` | Corruption làm giảm chất lượng; repair khôi phục baseline       |
 
 ## 4. Giải thích kỹ thuật
 
@@ -126,14 +129,15 @@ Artifact xác minh:
 
 ## 8. Phân tích kết quả
 
-| Metric/signal | Baseline | Corrupted | Repaired | Nhận xét |
-|---|---:|---:|---:|---|
-| `retrieval_hit_rate` | 1.00 | 0.40 | 1.00 | Corruption làm mất hoặc làm nhiễu tài liệu đúng; repair phục hồi hoàn toàn |
-| `mean_token_f1` | 1.00 | 0.3074 | 1.00 | Chất lượng answer giảm mạnh khi context bị hỏng |
-| `judge_accuracy` | 1.00 | 0.40 | 1.00 | Judge xác nhận tác động rõ ràng của corruption |
-| `mean_judge_score` | 5.0 | 2.9 | 5.0 | Điểm trung bình giảm từ tuyệt đối xuống mức trung bình |
-| Quality checks | Pass | Fail | Pass | Corrupted có 2 duplicate ID và 4 summary quá ngắn |
-| Freshness | Fresh | Not fresh | Fresh | Corrupted có 3 stale rows; repaired không còn stale row |
+
+| Metric/signal        | Baseline | Corrupted | Repaired | Nhận xét                                                                              |
+| -------------------- | -------: | --------: | -------: | --------------------------------------------------------------------------------------- |
+| `retrieval_hit_rate` |     1.00 |      0.40 |     1.00 | Corruption làm mất hoặc làm nhiễu tài liệu đúng; repair phục hồi hoàn toàn |
+| `mean_token_f1`      |     1.00 |    0.3074 |     1.00 | Chất lượng answer giảm mạnh khi context bị hỏng                                  |
+| `judge_accuracy`     |     1.00 |      0.40 |     1.00 | Judge xác nhận tác động rõ ràng của corruption                                  |
+| `mean_judge_score`   |      5.0 |       2.9 |      5.0 | Điểm trung bình giảm từ tuyệt đối xuống mức trung bình                       |
+| Quality checks       |     Pass |      Fail |     Pass | Corrupted có 2 duplicate ID và 4 summary quá ngắn                                   |
+| Freshness            |    Fresh | Not fresh |    Fresh | Corrupted có 3 stale rows; repaired không còn stale row                              |
 
 Baseline có 24/24 records clean, quality pass và freshness pass. Corruption tạo dataset 23 rows, gồm 3 rows bị drop, 2 duplicate IDs, 4 summary quá ngắn và 3 stale rows. Kết quả retrieval giảm từ 1.00 xuống 0.40, còn repair khôi phục về 1.00.
 
@@ -158,12 +162,12 @@ Nếu có thêm thời gian, nên cập nhật testset builder để tự độn
 
 ## 10. Cam kết của thành viên
 
-- [x] Báo cáo phản ánh đúng phần việc và artifact đã kiểm chứng.
-- [x] Có thể giải thích luồng end-to-end và các lỗi đã xử lý.
-- [x] Các kết luận chính đều có metric hoặc artifact đối chiếu.
-- [x] Không ghi API key, token hoặc secret vào báo cáo.
-- [x] Báo cáo không sao chép nguyên văn báo cáo nhóm.
+- [X]  Báo cáo phản ánh đúng phần việc và artifact đã kiểm chứng.
+- [X]  Có thể giải thích luồng end-to-end và các lỗi đã xử lý.
+- [X]  Các kết luận chính đều có metric hoặc artifact đối chiếu.
+- [X]  Không ghi API key, token hoặc secret vào báo cáo.
+- [X]  Báo cáo không sao chép nguyên văn báo cáo nhóm.
 
-**Họ và tên:** Nguyễn Quang Huy  
-**MSSV:** 2A202601120  
+**Họ và tên:** Nguyễn Quang Huy
+**MSSV:** 2A202601120
 **Ngày xác nhận:** 2026-08-06
