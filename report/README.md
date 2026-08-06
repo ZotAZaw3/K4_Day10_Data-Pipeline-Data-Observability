@@ -7,7 +7,7 @@ Thư mục `report/` cung cấp mẫu báo cáo cho **bài tập bắt buộc l�
 Mỗi nhóm nộp:
 
 1. Một [`group_report.md`](group_report.md) đại diện cho kết quả chung của nhóm.
-2. Mỗi thành viên hoàn thành thêm một bản [`individual_report.md`](individual_report.md) để mô tả vai trò, phần việc, kết quả và mức hiểu của mình trong nhóm.
+2. Mỗi thành viên hoàn thành thêm một bản `individual_<MSSV>.md` để mô tả vai trò, phần việc, kết quả và mức hiểu của mình trong nhóm.
 
 Khi cần lưu nhiều báo cáo thành viên trong cùng repository, nhóm nên tạo bản sao theo quy ước:
 
@@ -75,7 +75,7 @@ Owner chịu trách nhiệm chính cho module được giao, nhưng không đồ
 
 ## 4. Phần việc và báo cáo vai trò của thành viên
 
-Nhóm phân công các khối dưới đây cho từng thành viên. Mỗi khối có một owner chính; owner có thể nhận nhiều khối khi nhóm ít người, nhưng phải nêu rõ phạm vi trong `individual_report.md`.
+Nhóm phân công các khối dưới đây cho từng thành viên. Mỗi khối có một owner chính; owner có thể nhận nhiều khối khi nhóm ít người, nhưng phải nêu rõ phạm vi trong `individual_<MSSV>.md`.
 
 | Khối                      | File trọng tâm                                                      | Output cần kiểm tra                                            |
 | -------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------- |
@@ -96,7 +96,7 @@ Trình tự phụ thuộc cần giữ:
 5. Dùng lại cùng evaluation set cho baseline, corrupted và repaired.
 6. Đọc artifacts và metrics trước khi viết kết luận.
 
-Trong `individual_report.md`, mỗi thành viên cần phân biệt rõ:
+Trong `individual_<MSSV>.md`, mỗi thành viên cần phân biệt rõ:
 
 - phần đã hoàn thành;
 - phần mới dừng ở mức thử nghiệm;
@@ -211,7 +211,7 @@ Không đánh dấu hoàn thành nếu report mô tả kết quả không khớp
 - [ ] Mỗi deliverable có owner và output rõ ràng.
 - [ ] Một thành viên có thể chạy lại toàn bộ pipeline từ hướng dẫn chung.
 - [ ] `group_report.md` khớp với code, artifacts và metrics.
-- [ ] Mỗi thành viên có một `individual_report.md` riêng về vai trò và phần việc của mình.
+- [ ] Mỗi thành viên có một `individual_<MSSV>.md` riêng về vai trò và phần việc của mình.
 - [ ] Tất cả thành viên có thể giải thích luồng end-to-end và phần mình phụ trách.
 - [ ] Không có `.env`, API key hoặc secret trong repository, report hoặc log.
 
