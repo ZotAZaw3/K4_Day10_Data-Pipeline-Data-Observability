@@ -80,6 +80,11 @@ def build_clean_dataframe(records: list[PaperRecord], run_date: datetime) -> pd.
 
     # 3. age_days relative to run_date (NaT-safe)
     run_ts = pd.Timestamp(run_date)
+    # Crossref publication dates are date-only and therefore timezone-naive.
+    # Normalize an aware run timestamp to UTC-naive before subtraction so
+    # pandas does not mix tz-aware and tz-naive datetime values.
+    if run_ts.tz is not None:
+        run_ts = run_ts.tz_convert("UTC").tz_localize(None)
     df["age_days"] = (run_ts - df["published_dt"]).dt.days
 
     # 4. Helper columns
