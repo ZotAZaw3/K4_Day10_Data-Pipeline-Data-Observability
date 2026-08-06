@@ -27,10 +27,10 @@
     ]
   },
   {
-    "id": "10.2118/234689-pa::categories",
-    "question_type": "categories",
-    "question": "What categories does the paper 'SafeRAG: A Large-Language-Model-Based Multistage Retrieval-Augmented Framework for Oil and Gas Safety Report Generation' belong to?",
-    "ground_truth": "",
+    "id": "10.2118/234689-pa::summary-rewrite",
+    "question_type": "summary",
+    "question": "What problem or domain does the paper 'SafeRAG: A Large-Language-Model-Based Multistage Retrieval-Augmented Framework for Oil and Gas Safety Report Generation' address?",
+    "ground_truth": "Summary In high-risk industrial settings, leveraging large language models (LLMs) for automated accident analysis and generating safety reports has emerged as an efficient workflow.",
     "ground_truth_doc_ids": [
       "10.2118/234689-pa"
     ]
@@ -63,10 +63,10 @@
     ]
   },
   {
-    "id": "10.1007/s10278-026-02086-9::categories",
-    "question_type": "categories",
-    "question": "What categories does the paper 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study' belong to?",
-    "ground_truth": "",
+    "id": "10.1007/s10278-026-02086-9::summary-rewrite",
+    "question_type": "summary",
+    "question": "What problem or domain does the paper 'JADE-Plus: A Multimodal Agentic Retrieval-Augmented Generation Large Language Framework for Diagnostic Support in Jawbone Lesions: Development and Technical Validation Study' address?",
+    "ground_truth": "Abstract Diagnosing jawbone lesions in oral and maxillofacial radiology remains challenging due to overlapping radiological features and the need for integrated clinical reasoning.",
     "ground_truth_doc_ids": [
       "10.1007/s10278-026-02086-9"
     ]
@@ -99,10 +99,10 @@
     ]
   },
   {
-    "id": "10.21203/rs.3.rs-10178277/v1::categories",
-    "question_type": "categories",
-    "question": "What categories does the paper 'Retrieval-Augmented Large-Language-Model-Based Time-Series Forecasting for Cross-Market Equity Analysis' belong to?",
-    "ground_truth": "",
+    "id": "10.21203/rs.3.rs-10178277/v1::summary-rewrite",
+    "question_type": "summary",
+    "question": "What problem or domain does the paper 'Retrieval-Augmented Large-Language-Model-Based Time-Series Forecasting for Cross-Market Equity Analysis' address?",
+    "ground_truth": "<title>Abstract</title> <p>Time-series foundation models and retrieval-based augmentation have recently emerged as relevant tools for financial forecasting, yet it remains unclear when explicit historical retrieval helps a pre-trained probabilistic forecaster in noisy equity settings.",
     "ground_truth_doc_ids": [
       "10.21203/rs.3.rs-10178277/v1"
     ]
@@ -135,10 +135,10 @@
     ]
   },
   {
-    "id": "10.2196/preprints.106157::categories",
-    "question_type": "categories",
-    "question": "What categories does the paper 'Does retrieval-augmented generation impact medical students\u2019 perceptions of large language models? (Preprint)' belong to?",
-    "ground_truth": "",
+    "id": "10.2196/preprints.106157::summary-rewrite",
+    "question_type": "summary",
+    "question": "What problem or domain does the paper 'Does retrieval-augmented generation impact medical students\u2019 perceptions of large language models? (Preprint)' address?",
+    "ground_truth": "<sec> <title>BACKGROUND</title> <p>There is evidence of rapid adoption of large language models (LLMs) in undergraduate medical education, with medical students using it to support their learning.",
     "ground_truth_doc_ids": [
       "10.2196/preprints.106157"
     ]
@@ -171,10 +171,10 @@
     ]
   },
   {
-    "id": "10.3390/buildings16132637::categories",
-    "question_type": "categories",
-    "question": "What categories does the paper 'An Agentic AI System for Roof Design Compliance Using Computer Vision, Retrieval-Augmented Generation and Large Language Models' belong to?",
-    "ground_truth": "",
+    "id": "10.3390/buildings16132637::summary-rewrite",
+    "question_type": "summary",
+    "question": "What problem or domain does the paper 'An Agentic AI System for Roof Design Compliance Using Computer Vision, Retrieval-Augmented Generation and Large Language Models' address?",
+    "ground_truth": "Designers, engineers, and building officials face increasing pressure to accelerate and improve the accuracy of design review for buildings and infrastructure.",
     "ground_truth_doc_ids": [
       "10.3390/buildings16132637"
     ]

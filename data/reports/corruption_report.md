@@ -5,9 +5,9 @@
 | --- | --- | --- | --- | --- |
 | samples | 20 | 20 | 20 | 0 |
 | retrieval_hit_rate | 1.0 | 0.4 | 1.0 | 0.0 |
-| mean_token_f1 | 0.75 | 0.2537037037037037 | 0.75 | 0.0 |
-| judge_accuracy | 0.75 | 0.25 | 0.75 | 0.0 |
-| mean_judge_score | 4 | 2.3 | 4 | 0 |
+| mean_token_f1 | 1.0 | 0.3074074074074074 | 1.0 | 0.0 |
+| judge_accuracy | 1.0 | 0.4 | 1.0 | 0.0 |
+| mean_judge_score | 5 | 2.9 | 5 | 0 |
 
 ## Corrupted Data Quality
 - **report_name**: corrupted_quality

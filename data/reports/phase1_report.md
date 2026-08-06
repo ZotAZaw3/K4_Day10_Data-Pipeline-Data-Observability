@@ -9,13 +9,13 @@
 ## Retrieval / Evaluation Metrics
 - **samples**: 20
 - **retrieval_hit_rate**: 1.0
-- **mean_token_f1**: 0.75
-- **judge_accuracy**: 0.75
-- **mean_judge_score**: 4
+- **mean_token_f1**: 1.0
+- **judge_accuracy**: 1.0
+- **mean_judge_score**: 5
 - **ragas**:
-  - context_precision: 0.249999999975
-  - context_recall: 0.3333333333333333
-  - faithfulness: 0.3333333333333333
+  - context_precision: 0.49999999995
+  - context_recall: 0.5
+  - faithfulness: 0.4875
 
 ## Data Quality
 - **report_name**: baseline_quality
