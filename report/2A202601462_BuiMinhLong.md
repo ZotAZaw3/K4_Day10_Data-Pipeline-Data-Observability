@@ -4,27 +4,29 @@
 
 ## 1. Thông tin cá nhân
 
-| Thông tin         | Nội dung                  |
-| ------------------ | -------------------------- |
-| Họ và tên       | Bùi Minh Long             |
-| MSSV               | 2A202601462                     |
-| Khóa/Lớp         | K4              |
-| Tên nhóm         | [Tên hoặc mã nhóm]     |
-| Vai trò chính    | Evaluation & Observability owner |
+
+| Thông tin         | Nội dung                                                             |
+| ------------------ | --------------------------------------------------------------------- |
+| Họ và tên       | Bùi Minh Long                                                        |
+| MSSV               | 2A202601462                                                           |
+| Khóa/Lớp         | K4                                                                    |
+| Tên nhóm         | FIFO                                                                  |
+| Vai trò chính    | Evaluation & Observability owner                                      |
 | Repository         | https://github.com/ZotAZaw3/K4_Day10_Data-Pipeline-Data-Observability |
-| Ngày hoàn thành | 2026-08-06               |
+| Ngày hoàn thành | 2026-08-06                                                            |
 
 ## 2. Vai trò và phạm vi công việc
 
 ### Phần việc sở hữu
 
-| Module/deliverable | File/hàm phụ trách | Input nhận vào | Output bàn giao  | Trạng thái                                 |
-| ------------------ | --------------------- | ---------------- | ----------------- | -------------------------------------------- |
-| Evaluation set builder | `src/evaluation/testset.py` — `build_test_set(df, output_path)` | Cleaned dataframe (`paper_id`, `title`, `summary`, `authors_joined`, `categories_joined`, `published`) | `data/eval/test_set.json` — 20 câu hỏi thật (5 paper × 4 loại) sinh từ dữ liệu Crossref đã clean | Hoàn thành, **đã chạy trên dữ liệu Crossref thật** qua `script/run_phase1.py` |
-| Data quality checks | `src/observability/quality.py` — `run_data_quality_checks(df, settings, report_name)` | Cleaned dataframe | `data/quality/baseline_quality.json` (row count, null, duplicate, stale rows) | Hoàn thành, đã chạy trên `data/clean/papers_clean.json` thật (24 dòng, `passed: true`) |
-| Freshness report | `src/observability/quality.py` — `build_freshness_report(df, settings, report_path)` | Cleaned dataframe (`published`, `age_days`) | `data/quality/freshness_report.json` (`latest_published`, `oldest_published`, `stale_rows`, `is_fresh`) | Hoàn thành, đã chạy; `is_fresh: true`, 0 stale rows |
-| Markdown reporting | `src/observability/reporting.py` — `generate_phase1_report(...)`, `generate_corruption_report(...)` | Dict `metrics`/`quality`/`freshness` từ các bước trên | `data/reports/phase1_report.md` (đã sinh, khớp JSON/CSV thật) | `generate_phase1_report` hoàn thành và đã chạy thật; `generate_corruption_report` mới self-check — chưa đủ input vì `repaired_metrics.json` chưa tồn tại |
-| Corrupted dataset quality/freshness + join với corruption log | `src/pipelines/corruption_quality_flow.py` — `main()`, `src/observability/correlation.py` — `correlate_corruption_with_quality(...)` | Corrupted dataframe (từ `corrupt_clean_dataframe`), `corruption_log.json`, baseline `quality`/`freshness` JSON có sẵn trong `data/quality/` | `data/quality/corrupted_quality.json`, `data/quality/freshness_corrupted.json`, `data/quality/corruption_quality_correlation.json` | Hoàn thành, **đã chạy trên dữ liệu thật** (`data/clean/papers_clean.json`, 24 dòng) — 2026-08-06 |
+
+| Module/deliverable                                             | File/hàm phụ trách                                                                                                                  | Input nhận vào                                                                                                                              | Output bàn giao                                                                                                                   | Trạng thái                                                                                                                                                             |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Evaluation set builder                                         | `src/evaluation/testset.py` — `build_test_set(df, output_path)`                                                                       | Cleaned dataframe (`paper_id`, `title`, `summary`, `authors_joined`, `categories_joined`, `published`)                                        | `data/eval/test_set.json` — 20 câu hỏi thật (5 paper × 4 loại) sinh từ dữ liệu Crossref đã clean                        | Hoàn thành,**đã chạy trên dữ liệu Crossref thật** qua `script/run_phase1.py`                                                                                    |
+| Data quality checks                                            | `src/observability/quality.py` — `run_data_quality_checks(df, settings, report_name)`                                                 | Cleaned dataframe                                                                                                                             | `data/quality/baseline_quality.json` (row count, null, duplicate, stale rows)                                                      | Hoàn thành, đã chạy trên`data/clean/papers_clean.json` thật (24 dòng, `passed: true`)                                                                            |
+| Freshness report                                               | `src/observability/quality.py` — `build_freshness_report(df, settings, report_path)`                                                  | Cleaned dataframe (`published`, `age_days`)                                                                                                   | `data/quality/freshness_report.json` (`latest_published`, `oldest_published`, `stale_rows`, `is_fresh`)                            | Hoàn thành, đã chạy;`is_fresh: true`, 0 stale rows                                                                                                                  |
+| Markdown reporting                                             | `src/observability/reporting.py` — `generate_phase1_report(...)`, `generate_corruption_report(...)`                                   | Dict`metrics`/`quality`/`freshness` từ các bước trên                                                                                     | `data/reports/phase1_report.md` (đã sinh, khớp JSON/CSV thật)                                                                  | `generate_phase1_report` hoàn thành và đã chạy thật; `generate_corruption_report` mới self-check — chưa đủ input vì `repaired_metrics.json` chưa tồn tại |
+| Corrupted dataset quality/freshness + join với corruption log | `src/pipelines/corruption_quality_flow.py` — `main()`, `src/observability/correlation.py` — `correlate_corruption_with_quality(...)` | Corrupted dataframe (từ`corrupt_clean_dataframe`), `corruption_log.json`, baseline `quality`/`freshness` JSON có sẵn trong `data/quality/` | `data/quality/corrupted_quality.json`, `data/quality/freshness_corrupted.json`, `data/quality/corruption_quality_correlation.json` | Hoàn thành,**đã chạy trên dữ liệu thật** (`data/clean/papers_clean.json`, 24 dòng) — 2026-08-06                                                               |
 
 Chỉ nhận ownership cho phần bạn trực tiếp thực hiện. Liên hệ rõ phần việc của bạn với đầu vào, đầu ra và các thành viên phụ thuộc vào phần đó.
 
@@ -34,17 +36,19 @@ Chỉ nhận ownership cho phần bạn trực tiếp thực hiện. Liên hệ 
 
 ### Việc hỗ trợ ngoài phạm vi chính
 
-| Hoạt động                         | Thành viên/module được hỗ trợ | Kết quả                    |
-| ------------------------------------ | ------------------------------------ | ---------------------------- |
-| Đọc `retrieval/qa.py` và `retrieval/index.py` để suy ra contract câu hỏi/metadata | RAG & agent owner | Xác nhận `question_type` và cách `answer_question` trích câu trả lời, tránh test set và agent lệch format nhau |
+
+| Hoạt động                                                                            | Thành viên/module được hỗ trợ | Kết quả                                                                                                                |
+| --------------------------------------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| Đọc`retrieval/qa.py` và `retrieval/index.py` để suy ra contract câu hỏi/metadata | RAG & agent owner                    | Xác nhận`question_type` và cách `answer_question` trích câu trả lời, tránh test set và agent lệch format nhau |
 
 ## 3. Kết quả theo vai trò
 
-| Nhiệm vụ đã thực hiện | File/hàm/artifact liên quan | Kết quả bàn giao       | Cách xác minh         |
-| --------------------------- | ----------------------------- | ------------------------- | ----------------------- |
-| Implement `build_test_set` | `src/evaluation/testset.py` | Hàm sinh 4 câu hỏi/paper, ghi JSON qua `write_json` | `python src/evaluation/testset.py` (self-check `assert`, dùng dataframe giả lập trong `tempfile`) |
-| Implement `run_data_quality_checks` + `build_freshness_report` | `src/observability/quality.py` | Hai hàm trả dict + ghi JSON | `python src/observability/quality.py` (self-check `assert`) |
-| Implement `generate_phase1_report` + `generate_corruption_report` | `src/observability/reporting.py` | Hai hàm ghi Markdown từ dict metrics/quality/freshness | `python src/observability/reporting.py` (self-check `assert`) |
+
+| Nhiệm vụ đã thực hiện                                              | File/hàm/artifact liên quan                                                  | Kết quả bàn giao                                                                                                                                                 | Cách xác minh                                                                                                       |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Implement`build_test_set`                                                | `src/evaluation/testset.py`                                                    | Hàm sinh 4 câu hỏi/paper, ghi JSON qua`write_json`                                                                                                               | `python src/evaluation/testset.py` (self-check `assert`, dùng dataframe giả lập trong `tempfile`)                  |
+| Implement`run_data_quality_checks` + `build_freshness_report`            | `src/observability/quality.py`                                                 | Hai hàm trả dict + ghi JSON                                                                                                                                       | `python src/observability/quality.py` (self-check `assert`)                                                           |
+| Implement`generate_phase1_report` + `generate_corruption_report`         | `src/observability/reporting.py`                                               | Hai hàm ghi Markdown từ dict metrics/quality/freshness                                                                                                            | `python src/observability/reporting.py` (self-check `assert`)                                                         |
 | Chạy quality/freshness cho corrupted dataset + join với corruption log | `src/pipelines/corruption_quality_flow.py`, `src/observability/correlation.py` | `data/quality/corrupted_quality.json`, `data/quality/freshness_corrupted.json`, `data/quality/corruption_quality_correlation.json` (trên dữ liệu Crossref thật) | `PYTHONPATH=src python script/run_corruption_quality_check.py` + self-check `python src/observability/correlation.py` |
 
 Nêu một output cụ thể mà phần việc của bạn tạo ra hoặc giúp xác minh:
@@ -79,6 +83,7 @@ Mỗi row lấy trực tiếp `row["paper_id"]` (cột do `cleaning.py` sinh ra)
 
 **4) Join corruption log với quality signal — chỉ báo "đổi" khi có bằng chứng (2026-08-06).**
 `correlate_corruption_with_quality` (trong `src/observability/correlation.py`) nhận `corruption_log.json` cùng 4 báo cáo baseline/corrupted quality+freshness, và có một bảng ánh xạ cố định `CORRUPTION_SIGNAL_MAP` nối mỗi loại corruption với đúng một field quality/freshness *có khả năng* bắt được nó (vd. `blanked_summary_paper_ids` → `quality.summary_too_short`, `stale_date_paper_ids` → `freshness.stale_rows`). Với mỗi loại corruption có ID bị ảnh hưởng (`affected_count > 0`), hàm so `baseline_value` với `corrupted_value` của field đó:
+
 - Nếu khác nhau → xếp vào `changed_signals` kèm `evidence` (giá trị trước/sau + số dòng bị corrupt).
 - Nếu giống nhau, hoặc corruption đó không có field nào ánh xạ tới (`mapping is None`, ví dụ `noise_injected_paper_ids` — repo chưa có check nào đo noise text) → xếp vào `unchanged_signals` kèm lý do cụ thể.
 
@@ -86,13 +91,14 @@ Cách làm này tránh hai lỗi thường gặp: (a) suy diễn "corruption ch�
 
 ### Input, output và contract
 
-| Thành phần                   | Mô tả                                     |
-| ------------------------------ | ------------------------------------------- |
-| Input                          | Cleaned dataframe với cột `paper_id, title, summary, authors_joined, categories_joined, published, age_days` (do `cleaning.py` bàn giao); riêng `correlate_corruption_with_quality` nhận thêm `corruption_log.json` + 4 dict quality/freshness (baseline, corrupted) |
-| Output                         | `data/eval/test_set.json` (list dict), `data/quality/<name>.json`, `data/quality/freshness_report.json`, `data/reports/phase1_report.md`, `data/reports/corruption_report.md`, `data/quality/freshness_corrupted.json`, `data/quality/corruption_quality_correlation.json` |
-| Module phụ thuộc             | `ingestion/cleaning.py` (schema), `ingestion/corruption.py` (`corrupt_clean_dataframe`, sinh `corruption_log.json`), `core/utils.py` (`write_json`, `write_text`, `first_sentence`, `read_json`), `core/config.py` (`Settings.paths`, `freshness_threshold_days`) |
-| Module sử dụng output        | `evaluation/metrics.py` (đọc `test_set.json`), `pipelines/phase1.py` và `pipelines/corruption_flow.py` (gọi quality/freshness/reporting), `pipelines/corruption_quality_flow.py` (gọi `correlate_corruption_with_quality`) |
-| Điều kiện lỗi cần xử lý | Dataframe rỗng → `build_test_set` raise `ValueError` thay vì ghi test set rỗng; thiếu cột `age_days` → quality/freshness fallback `stale_rows = 0` thay vì crash; corruption type không có mapping quality/freshness → xếp vào `unchanged_signals` thay vì bỏ sót âm thầm |
+
+| Thành phần                   | Mô tả                                                                                                                                                                                                                                                                                    |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Input                          | Cleaned dataframe với cột`paper_id, title, summary, authors_joined, categories_joined, published, age_days` (do `cleaning.py` bàn giao); riêng `correlate_corruption_with_quality` nhận thêm `corruption_log.json` + 4 dict quality/freshness (baseline, corrupted)                  |
+| Output                         | `data/eval/test_set.json` (list dict), `data/quality/<name>.json`, `data/quality/freshness_report.json`, `data/reports/phase1_report.md`, `data/reports/corruption_report.md`, `data/quality/freshness_corrupted.json`, `data/quality/corruption_quality_correlation.json`                 |
+| Module phụ thuộc             | `ingestion/cleaning.py` (schema), `ingestion/corruption.py` (`corrupt_clean_dataframe`, sinh `corruption_log.json`), `core/utils.py` (`write_json`, `write_text`, `first_sentence`, `read_json`), `core/config.py` (`Settings.paths`, `freshness_threshold_days`)                          |
+| Module sử dụng output        | `evaluation/metrics.py` (đọc `test_set.json`), `pipelines/phase1.py` và `pipelines/corruption_flow.py` (gọi quality/freshness/reporting), `pipelines/corruption_quality_flow.py` (gọi `correlate_corruption_with_quality`)                                                            |
+| Điều kiện lỗi cần xử lý | Dataframe rỗng →`build_test_set` raise `ValueError` thay vì ghi test set rỗng; thiếu cột `age_days` → quality/freshness fallback `stale_rows = 0` thay vì crash; corruption type không có mapping quality/freshness → xếp vào `unchanged_signals` thay vì bỏ sót âm thầm |
 
 ### Cách xác minh
 
@@ -150,14 +156,15 @@ Giải thích ngắn gọn bằng lời của bạn:
 
 ### Metrics chính
 
-| Metric/signal          | Baseline | Corrupted | Repaired | Nhận xét của cá nhân |
-| ---------------------- | -------: | --------: | -------: | ------------------------- |
-| `retrieval_hit_rate` |  **1.0** |  **0.4** |  Chưa chạy | Giảm 60 điểm phần trăm sau corruption; `repaired_metrics.json` chưa tồn tại nên chưa đo được mức phục hồi |
-| `mean_token_f1`      |  **0.75** |  **0.254** |  Chưa chạy | Giảm gần 1/3; nhất quán với retrieval tệ đi (không tìm đúng doc thì answer khó khớp ground truth) |
-| `judge_accuracy`     |  **0.75** |  **0.25** |  Chưa chạy | Giảm 50 điểm phần trăm |
-| `mean_judge_score`   |  **4** |  **2** |  Chưa chạy | Giảm nửa thang điểm 1–5 |
-| Quality checks         |  **passed: true** (24 rows, 0 null, 0 dup, 0 stale) |  **passed: false** (23 rows, 2 dup `paper_id`, 4 summary quá ngắn, 3 stale) |  Chưa chạy | Quality check bắt được 4/6 loại corruption đã áp dụng (drop, blank summary, stale date, duplicate — xem `changed_signals` trong `corruption_quality_correlation.json`). **Không bắt được** `truncated_title_paper_ids` (`title_nulls` vẫn 0/0 vì title bị cắt ngắn chứ không null) và `noise_injected_paper_ids` (chưa có check nào đo noise text) — hai signal này nằm trong `unchanged_signals`, không được tính là "quality check phát hiện toàn bộ corruption" |
-| Freshness status       |  **is_fresh: true** (0 stale/24) |  stale_rows tăng lên 3 (theo `corrupted_quality.json`; `freshness_corrupted.json` do teammate observability khác đối chiếu) |  Chưa chạy | Baseline fresh hoàn toàn; corruption cố ý làm cũ `published` ở một phần dữ liệu |
+
+| Metric/signal        |                                           Baseline |                                                                                                                       Corrupted |    Repaired | Nhận xét của cá nhân                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| -------------------- | -------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------: | ----------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `retrieval_hit_rate` |                                            **1.0** |                                                                                                                         **0.4** | Chưa chạy | Giảm 60 điểm phần trăm sau corruption;`repaired_metrics.json` chưa tồn tại nên chưa đo được mức phục hồi                                                                                                                                                                                                                                                                                                                                                                                 |
+| `mean_token_f1`      |                                           **0.75** |                                                                                                                       **0.254** | Chưa chạy | Giảm gần 1/3; nhất quán với retrieval tệ đi (không tìm đúng doc thì answer khó khớp ground truth)                                                                                                                                                                                                                                                                                                                                                                                           |
+| `judge_accuracy`     |                                           **0.75** |                                                                                                                        **0.25** | Chưa chạy | Giảm 50 điểm phần trăm                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `mean_judge_score`   |                                              **4** |                                                                                                                           **2** | Chưa chạy | Giảm nửa thang điểm 1–5                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| Quality checks       | **passed: true** (24 rows, 0 null, 0 dup, 0 stale) |                                                    **passed: false** (23 rows, 2 dup `paper_id`, 4 summary quá ngắn, 3 stale) | Chưa chạy | Quality check bắt được 4/6 loại corruption đã áp dụng (drop, blank summary, stale date, duplicate — xem`changed_signals` trong `corruption_quality_correlation.json`). **Không bắt được** `truncated_title_paper_ids` (`title_nulls` vẫn 0/0 vì title bị cắt ngắn chứ không null) và `noise_injected_paper_ids` (chưa có check nào đo noise text) — hai signal này nằm trong `unchanged_signals`, không được tính là "quality check phát hiện toàn bộ corruption" |
+| Freshness status     |                    **is_fresh: true** (0 stale/24) | stale_rows tăng lên 3 (theo`corrupted_quality.json`; `freshness_corrupted.json` do teammate observability khác đối chiếu) | Chưa chạy | Baseline fresh hoàn toàn; corruption cố ý làm cũ`published` ở một phần dữ liệu                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 Số liệu baseline/corrupted lấy từ `data/results/baseline_metrics.json` và `data/results/corrupted_metrics.json` thật trong repo (không phải giả lập); tôi đối chiếu bằng cách đọc trực tiếp hai file JSON, không suy diễn.
 
@@ -172,13 +179,14 @@ Corruption nào ảnh hưởng rõ nhất và vì sao?
 
 Đã kiểm tra trực tiếp bằng cách so `ground_truth_doc_ids` của `test_set.json` với từng danh sách `*_paper_ids` trong `data/results/corruption_log.json`:
 
-| Corruption | Số paper trong test set (/5) bị ảnh hưởng |
-| --- | ---: |
-| `dropped_latest_paper_ids` (drop hẳn record) | **3/5** |
-| `duplicated_paper_ids` | 2/5 |
-| `blanked_summary_paper_ids` | 1/5 |
-| `truncated_title_paper_ids` | 0/5 |
-| `stale_date_paper_ids` | 0/5 |
+
+| Corruption                                    | Số paper trong test set (/5) bị ảnh hưởng |
+| --------------------------------------------- | ---------------------------------------------: |
+| `dropped_latest_paper_ids` (drop hẳn record) |                                        **3/5** |
+| `duplicated_paper_ids`                        |                                            2/5 |
+| `blanked_summary_paper_ids`                   |                                            1/5 |
+| `truncated_title_paper_ids`                   |                                            0/5 |
+| `stale_date_paper_ids`                        |                                            0/5 |
 
 **Drop record là corruption ảnh hưởng rõ nhất**: 3 trong 5 paper được `build_test_set` lấy mẫu (tức 12/20 câu hỏi) bị xoá hẳn khỏi corrupted dataset trước khi build index — với các paper đó, cả exact-lookup theo title lẫn semantic search trong `answer_question` đều không thể trả về đúng `paper_id` vì document không còn tồn tại trong collection. Đây là nguyên nhân chính khiến `retrieval_hit_rate` rơi từ 1.0 xuống 0.4 (60% suy giảm khớp gần đúng với tỷ lệ 3/5 paper bị mất khỏi index).
 
@@ -202,12 +210,12 @@ Ban đầu tôi dự đoán corruption sẽ chủ yếu làm nhiễu *nội dung
 
 Đánh dấu sau khi tự kiểm tra:
 
-- [x] Nội dung báo cáo phản ánh đúng phần việc và mức hiểu của tôi.
-- [x] Tôi có thể giải thích luồng end-to-end, không chỉ module mình phụ trách.
-- [x] Mọi kết luận về kết quả đều có artifact hoặc metric để đối chiếu (phần chưa chạy được đã ghi rõ "Chưa chạy" thay vì bịa số).
-- [x] Tôi không ghi "đã chạy thành công" cho phần chưa được kiểm chứng.
-- [x] Báo cáo không chứa `.env`, API key, token hoặc secret.
-- [x] Báo cáo này không phải bản sao nguyên văn của báo cáo nhóm hoặc báo cáo thành viên khác.
+- [X]  Nội dung báo cáo phản ánh đúng phần việc và mức hiểu của tôi.
+- [X]  Tôi có thể giải thích luồng end-to-end, không chỉ module mình phụ trách.
+- [X]  Mọi kết luận về kết quả đều có artifact hoặc metric để đối chiếu (phần chưa chạy được đã ghi rõ "Chưa chạy" thay vì bịa số).
+- [X]  Tôi không ghi "đã chạy thành công" cho phần chưa được kiểm chứng.
+- [X]  Báo cáo không chứa `.env`, API key, token hoặc secret.
+- [X]  Báo cáo này không phải bản sao nguyên văn của báo cáo nhóm hoặc báo cáo thành viên khác.
 
 **Họ và tên:** Bùi Minh Long
 **Ngày xác nhận:** 2026-08-06
