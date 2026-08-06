@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from math import isfinite
 from statistics import mean
 import os
 import sys
@@ -95,7 +96,25 @@ def _run_ragas(settings: Settings, answers: list[dict[str, Any]]) -> dict[str, A
             llm=build_llm(settings=settings, temperature=0.0),
             embeddings=MiniLMEmbeddings(settings.embedding_model),
         )
-        return dict(result)
+        # Ragas 0.4.x returns EvaluationResult, not a plain mapping. Read the
+        # public per-sample scores and aggregate them explicitly for JSON.
+        scores = getattr(result, "scores", None)
+        if not scores:
+            return {}
+
+        summary: dict[str, float] = {}
+        for metric_name in scores[0]:
+            values: list[float] = []
+            for score in scores:
+                value = score.get(metric_name)
+                if value is None:
+                    continue
+                numeric_value = float(value)
+                if isfinite(numeric_value):
+                    values.append(numeric_value)
+            if values:
+                summary[metric_name] = float(mean(values))
+        return summary
     except Exception as exc:  # pragma: no cover
         return {"error": f"Ragas evaluation failed: {exc}"}
 

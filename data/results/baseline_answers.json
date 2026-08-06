@@ -228,7 +228,7 @@
     "judge": {
       "score": 1,
       "correct": false,
-      "reasoning": "The model answer does not provide any information or categories related to the paper, making it incomplete and incorrect."
+      "reasoning": "The model answer does not provide any information regarding the categories of the paper, making it incomplete and incorrect."
     }
   },
   {
@@ -373,7 +373,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the key point about the adoption of large language models in medical education."
+      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the paper's focus on the adoption of large language models in medical education."
     }
   },
   {
@@ -460,7 +460,7 @@
     "judge": {
       "score": 1,
       "correct": false,
-      "reasoning": "The model answer does not provide any information regarding the categories of the paper, making it incomplete and incorrect."
+      "reasoning": "The model answer does not provide any information regarding the categories of the paper, making it materially incorrect."
     }
   },
   {
@@ -489,7 +489,7 @@
     "judge": {
       "score": 5,
       "correct": true,
-      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the key point about the pressures faced by designers, engineers, and building officials in the context of design review."
+      "reasoning": "The model answer is identical to the reference answer, accurately summarizing the main point about the pressures faced by designers, engineers, and building officials in the context of design review."
     }
   },
   {
@@ -576,7 +576,7 @@
     "judge": {
       "score": 1,
       "correct": false,
-      "reasoning": "The model answer does not provide any information or categories related to the paper, making it incomplete and incorrect."
+      "reasoning": "The model answer is missing entirely, making it impossible to evaluate its correctness against the reference answer."
     }
   }
 ]
